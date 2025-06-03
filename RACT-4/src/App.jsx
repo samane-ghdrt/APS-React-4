@@ -4,8 +4,8 @@ import RandomAdviceRendering from "./component/RandomAdviceRendering"
 function App() {
  return(
   <div>
-   <PostRendering/>
-   {/* <RandomAdviceRendering/> */}
+   {/* <PostRendering/> */}
+   <RandomAdviceRendering/>
    {/* <TodoList/> */}
   </div>
  )
