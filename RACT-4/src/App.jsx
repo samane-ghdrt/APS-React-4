@@ -5,8 +5,8 @@ function App() {
  return(
   <div>
    {/* <PostRendering/> */}
-   <RandomAdviceRendering/>
-   {/* <TodoList/> */}
+   {/* <RandomAdviceRendering/> */}
+   <TodoList/>
   </div>
  )
 };
