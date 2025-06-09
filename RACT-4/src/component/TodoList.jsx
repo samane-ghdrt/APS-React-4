@@ -4,14 +4,7 @@ import { useState,useEffect } from "react"
 export default function TodoList(){
 const [dataTask,setDataTask]=useState([])
 const [newTask,setNewTask]=useState('');
-const todo=async ()=>{
-    const res = await fetch(
-     "https://jsonplaceholder.typicode.com/todos?_start=0&_limit=5"
-   );
-   const info =await res.json();
-   setDataTask(info);
-   
-}
+
 const toggleComplete = (id) => {
     setDataTask(dataTask.map(task =>
         task.id === id ? { ...task, completed: !task.completed } : task
@@ -27,13 +20,24 @@ const deleteTask = (id) => {
     setDataTask(dataTask.filter(task => task.id !== id));
 };
 
-     useEffect(()=>todo(),[])
+     useEffect(()=>{
+        
+        const todo=async ()=>{
+        const res = await fetch(
+         "https://jsonplaceholder.typicode.com/todos?_start=0&_limit=5"
+       );
+       const info =await res.json();
+       setDataTask(info);
+       
+    }
+  todo();
+},[])
 
     
     return(
         <div>
             <div>
-                <input type="text" className="form-control" value={newTask}
+                <input type="text" className="form-control" value={newTask} onChange={(e) => setNewTask(e.target.value)}
                  />
                 <button  className="btn"  onClick={handle}>
                     add
@@ -43,11 +47,12 @@ const deleteTask = (id) => {
              { dataTask.map((item)=>{
 return        <div>
                   <input type="checkbox" className="form-check-input me-2"
-        checked={item.completed}
-        onChange={() => toggleComplete(item.id)} />  <span style={{ textDecoration: item.completed ? "line-through" : "none" }}>
+                                 checked={item.completed}
+                            onChange={() => toggleComplete(item.id)} /> 
+         <span style={{ textDecoration: item.completed ? "line-through" : "none" }}>
         {item.title}
-      </span>
-                  <button className="btn btn-danger btn-sm" onClick={deleteTask(item.id)} ><i className="bi bi-trash"></i> </button>
+        </span>
+                  <button className="btn btn-danger btn-sm" onClick={() =>deleteTask(item.id)} ><i className="bi bi-trash"></i> </button>
               </div>
              })}
             </div>
